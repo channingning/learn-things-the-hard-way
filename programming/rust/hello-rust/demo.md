@@ -6,3 +6,5 @@ hello-rust
 |- Cargo.toml
 |- src
   |- main.rs
+
+`cargo run`

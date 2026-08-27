@@ -1,0 +1,8 @@
+# Rust 构建产物
+/target/
+
+# 平台相关二进制
+*.pdb
+*.dll
+*.so
+*.dylib
