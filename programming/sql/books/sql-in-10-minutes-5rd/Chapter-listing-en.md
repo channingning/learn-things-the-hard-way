@@ -24,4 +24,4 @@ Introduction
 Appendix A: Sample Table Scripts  
 Appendix B: SQL Statement Syntax  
 Appendix C: Using SQL Datatypes  
-Appendix D: SQL Reserved Words  
+Appendix D: SQL Reserved Words
