@@ -200,6 +200,11 @@ LIMIT 5 OFFSET 5;
 4 rows in set (0.00 sec)
 */
 
+-- LIMIT 4 OFFSET 3 简化为 LIMIT 3, 4
+SELECT prod_name
+FROM Products
+LIMIT 3,4;
+
 /* 2.7 使用注释 */
 SELECT prod_name  -- 这是一条注释
 FROM Products;
