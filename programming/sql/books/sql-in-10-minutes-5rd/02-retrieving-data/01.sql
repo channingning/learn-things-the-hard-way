@@ -2,10 +2,10 @@
  * create time: 2026-08-17 09:39
  *
 
-/* 2.1 SELECT 语句 */
+/* 2.1 SELECT 语句  The SELECT Statement */
 -- 关键字 keywork
 
-/* 2.2 检索单个列 */
+/* 2.2 检索单个列  Retrieving Individual Columns */
 SELECT prod_name
 FROM Products;
 
@@ -33,7 +33,7 @@ prod_name
 FROM
 Products;
 
-/* 2.3 检索多个列 */
+/* 2.3 检索多个列  Retrieving Multiple Columns */
 SELECT prod_id, prod_name, prod_price
 FROM Products;
 
@@ -54,7 +54,7 @@ FROM Products;
 9 rows in set (0.00 sec)
 */
 
-/* 2.4 检索所有列 */
+/* 2.4 检索所有列  Retrieving All Columns */
 SELECT *
 FROM Products;
 
@@ -75,7 +75,7 @@ FROM Products;
 9 rows in set (0.00 sec)
 */
 
-/* 2.5 检索不同的值 */
+/* 2.5 检索不同的值  Retrieving Distinct Rows */
 SELECT vend_id
 FROM Products;
 
@@ -149,7 +149,7 @@ FROM Products;
 6 rows in set (0.00 sec)
 */
 
-/* 2.6 限制结果 */
+/* 2.6 限制结果  Limiting Results */
 -- SQL Server
 SELECT TOP 5 prod_name
 FROM Products;
@@ -205,7 +205,7 @@ SELECT prod_name
 FROM Products
 LIMIT 3,4;
 
-/* 2.7 使用注释 */
+/* 2.7 使用注释  Using Comments */
 SELECT prod_name  -- 这是一条注释
 FROM Products;
 
@@ -219,4 +219,6 @@ FROM Products; */
 SELECT prod_name
 FROM Products;
 
-/* 2.8 小节 */
+/* 2.8 小节  Summary */
+
+/* 2.9 挑战题  Challenges */
