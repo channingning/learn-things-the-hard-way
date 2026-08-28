@@ -7,4 +7,4 @@ hello-rust
 |- src
   |- main.rs
 
-`cargo run`
+`cargo run` 
