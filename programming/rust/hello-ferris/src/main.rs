@@ -1,3 +1,7 @@
+/*
+ * create time: 2026-08-28 10:06
+ */
+
 use ferris_says::say;  // from the previous step
 use std::io::{stdout, BufWriter};
 
