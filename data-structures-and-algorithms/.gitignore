@@ -1,0 +1,7 @@
+# 多语言构建产物兜底
+**/target/
+**/__pycache__/
+**/*.class
+**/node_modules/
+**/bin/
+**/obj/
