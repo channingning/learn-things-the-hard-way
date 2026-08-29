@@ -149,7 +149,7 @@ WHERE cust_email IS NULL;
 2 rows in set (0.00 sec)
 */
 
--- 测试 test
+-- my test
 SELECT cust_name, cust_email
 FROM Customers
 WHERE cust_email IS NULL;
