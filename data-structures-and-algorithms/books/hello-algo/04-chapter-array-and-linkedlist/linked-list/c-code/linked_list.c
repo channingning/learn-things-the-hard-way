@@ -80,6 +80,45 @@ int find(ListNode *head, int target) {
 }
 
 
+/* 双向链表 */
+/* 双向链表节点结构体 */
+typedef struct DoublyListNode {
+    int val;                      // 节点值
+    struct DoublyListNode *next;  // 指向后继节点的指针
+    struct DoublyListNode *prev;  // 指向前继节点的指针
+} DoublyListNode;
+
+/* 构造函数 */
+DoublyListNode *newListNodedoubly(int val) {
+    DoublyListNode *node;
+    node = (DoublyListNode *)malloc(sizeof(DoublyListNode));
+    node->val = val;
+    node->next = NULL;
+    node->prev = NULL;
+    return node;
+}
+
+/* 初始化双向列表  补充 */
+DoublyListNode *initDoublyLinkedList() {
+    DoublyListNode *n0 = newListNodedoubly(1);
+    DoublyListNode *n1 = newListNodedoubly(3);
+    DoublyListNode *n2 = newListNodedoubly(2);
+    DoublyListNode *n3 = newListNodedoubly(5);
+    DoublyListNode *n4 = newListNodedoubly(4);
+    n0->next = n1;
+    n1->prev = n0;
+    n1->next = n2;
+    n2->prev = n1;
+    n2->next = n3;
+    n3->prev = n2;
+    n3->next = n4;
+    n4->prev = n3;
+    n4->next = n0;
+    return n0;
+}
+
+// ------------------------------------------------------------------------------------
+
 /* 环形列表  补充 */
 /* AI 优化的环形链表 —— 复用 ListNode 结构体，补齐操作函数 */
 /* 返回：头节点指针，空链表返回 NULL */
@@ -189,42 +228,4 @@ void freeCircularList(ListNode **headRef) {
     }
     free(head);
     *headRef = NULL;
-}
-
-
-/* 双向列表 */
-/* 双向链表节点结构体 */
-typedef struct DoublyListNode {
-    int val;                      // 节点值
-    struct DoublyListNode *next;  // 指向后继节点的指针
-    struct DoublyListNode *prev;  // 指向前继节点的指针
-} DoublyListNode;
-
-/* 构造函数 */
-DoublyListNode *newListNodedoubly(int val) {
-    DoublyListNode *node;
-    node = (DoublyListNode *)malloc(sizeof(DoublyListNode));
-    node->val = val;
-    node->next = NULL;
-    node->prev = NULL;
-    return node;
-}
-
-/* 初始化双向列表  补充 */
-DoublyListNode *initDoublyLinkedList() {
-    DoublyListNode *n0 = newListNodedoubly(1);
-    DoublyListNode *n1 = newListNodedoubly(3);
-    DoublyListNode *n2 = newListNodedoubly(2);
-    DoublyListNode *n3 = newListNodedoubly(5);
-    DoublyListNode *n4 = newListNodedoubly(4);
-    n0->next = n1;
-    n1->prev = n0;
-    n1->next = n2;
-    n2->prev = n1;
-    n2->next = n3;
-    n3->prev = n2;
-    n3->next = n4;
-    n4->prev = n3;
-    n4->next = n0;
-    return n0;
 }
