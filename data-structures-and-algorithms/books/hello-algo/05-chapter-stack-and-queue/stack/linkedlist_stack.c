@@ -1,125 +1,108 @@
 /*
- * create time: 2026-08-15 09:02
+ * create time: 2026-08-22 13:29
+ * 基于链表实现的栈
  */
 
 #include <stdlib.h>
-#include <assert.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <limits.h>
 
-/* 列表类 */
+// 备注：自引用，内部有指向自己的指针
+// 备注：自引用不能匿名，必须带标签名
+// List Node 结构体  补充
+typedef struct ListNode {
+    int val;               // 节点值
+    struct ListNode *next; // 指向下一节点的指针
+} ListNode;
+
+// 备注：非自引用可以匿名，LinkedListStack 内部的 top 指向 ListNode ，不是指向 LinkedListStack 自己
 typedef struct {
-    int *arr;         // 数组（存储列表元素）
-    int capacity;     // 列表容量
-    int size;         // 列表大小
-    int extendRatio;  // 列表每次扩容的倍数
-} MyList;
-
-/* 前置声明：add() 中会调用 extendCapacity()，而 extendCapacity() 定义在后面  补充 */
-void extendCapacity(MyList *nums);
+    ListNode *top;  // 将头节点作为栈顶
+    int size;       // 栈的长度
+} LinkedListStack;
 
 /* 构造函数 */
-MyList *newMyList() {
-    MyList *nums = malloc(sizeof(MyList));  // 备注：malloc 返回的是 void * （万能指针），C 允许 void * 自动赋值给任何类型指针。
-    nums->capacity = 10;
-    nums->arr = malloc(sizeof(int) * nums->capacity);
-    nums->size = 0;
-    nums->extendRatio = 2;
-    return nums;
+LinkedListStack *newLinkedListStack() {
+    LinkedListStack *s = malloc(sizeof(LinkedListStack));
+    s->top = NULL;
+    s->size = 0;
+    return s;
 }
 
 /* 析构函数 */
-void delMyList(MyList *nums) {
-    free(nums->arr);
-    free(nums);
-}
-
-/* 获取列表长度 */
-int size(MyList *nums) {
-    return nums->size;
-}
-
-/* 获取列表容量 */
-int capacity(MyList *nums) {
-    return nums->capacity;
-}
-
-/* 访问元素 */
-int get(MyList *nums, int index) {
-    assert(index >=0 && index < nums->size);
-    return nums->arr[index];
-}
-
-/* 更新元素 */
-void set(MyList *nums, int num, int index) {
-    assert(index >=0 && index < nums->size);
-    nums->arr[index] = num;
-}
-
-/* 在尾部添加元素 */
-void add(MyList *nums, int num) {
-    if (size(nums) == capacity(nums)) {
-        extendCapacity(nums);  // 扩容
+void delLinkedListStack(LinkedListStack *s) {
+    while (s->top) {
+        ListNode *n = s->top->next;
+        free(s->top);
+        s->top = n;
     }
-    nums->arr[size(nums)] = num;
-    nums->size++;
+    free(s);
 }
 
-/* 在中间插入元素 */
-void insert(MyList *nums, int index, int num) {
-    assert(index >=0 && index < nums->size);
-    // 元素数量超出容量时，触发扩容机制
-    if (size(nums) == capacity(nums)) {
-        extendCapacity(nums); // 扩容
-    }
-    for (int i = size(nums); i > index; i--) {
-        nums->arr[i] = nums->arr[i - 1];
-    }
-    nums->arr[index] = num;
-    nums->size++;
+/* 获取栈的长度 */
+int size(LinkedListStack *s) {
+    return s->size;
 }
 
-/* 删除元素 */
-// 注意：stdio.h 占用了 remove 关键词
-int removeItem(MyList *nums, int index) {
-    assert(index >=0 && index < nums->size);
-    int num = nums->arr[index];
-    for (int i = index; i < size(nums); i++) {
-        nums->arr[i] = nums->arr[i + 1];
-    }
-    nums->size--;
-    return num;
+/* 判断栈是否为空 */
+bool isEmpty(LinkedListStack *s) {
+    return size(s) == 0;
 }
 
-/* 列表扩容 */
-void extendCapacity(MyList *nums) {
-    // 先分配空间
-    int newCapacity = capacity(nums) * nums->extendRatio;
-    int *extend = (int *)malloc(sizeof(int) * newCapacity);
-    int *temp = nums->arr;
-
-    // 拷贝旧数据到新数据
-    for (int i = 0; i < size(nums); i++) {
-        extend[i] = nums->arr[i];
-    }
-
-    // 释放旧数据
-    free(temp);
-
-    // 更新新数据
-    nums->arr = extend;
-    nums->capacity = newCapacity;
+/* 入栈 */
+void push(LinkedListStack *s, int num) {
+    ListNode *node = malloc(sizeof(ListNode));
+    node->next = s->top;  // 更新新加节点指针域
+    node->val = num;      // 更新新加节点数据域
+    s->top = node;        // 更新栈顶
+    s->size++;            // 更新栈大小
 }
 
-/* 将列表转换为 Array 用于打印 */
-int *toArray(MyList *nums) {
-    return nums->arr;
+/* 访问栈顶元素 */
+int peek(LinkedListStack *s) {
+    if (s->size == 0) {
+        printf("栈为空\n");
+        return INT_MAX;  // 返回 int 最大值表示错误
+    }
+    return s->top->val;
 }
 
-// ------------------------------------------------------------------------------------
+/* 出栈 */
+int pop(LinkedListStack *s) {
+    int val = peek(s);
+    ListNode *tmp = s->top;
+    s->top = s->top->next;
+    // 释放内存
+    free(tmp);
+    s->size--;
+    return val;
+}
+// 问题来源：链表实现栈，C语言版本的代码中:
+// 问题：栈为空再调用出栈时会发生段错误
+// 原因：peek里面虽然有判断但只是返回了INT_MAX，pop中没有对val判断程序会继续执行，
+// 所以在s->top->next的时候会发生段错误问题，这个时候s->top是为NULL的，不会有next。
 
-/* 遍历列表  补充 */
-void traverse(MyList *nums) {
-    int count = 0;
-    for (int i = 0; i < size(nums); i++) {
-         count += nums->arr[i];       
+// 步骤 1: int val = peek(s)
+//         → peek 里 s->size==0，返回 INT_MAX
+//         → 你以为函数会停在这里？不会，peek 只是 return 了一个值给 val
+// 步骤 2: ListNode *tmp = s->top
+//         → tmp = NULL（栈空时 top=NULL）
+// 步骤 3: s->top = s->top->next   ← 💥 段错误在这里！
+//         → 等价于 NULL->next
+//         → 解引用空指针，崩溃
+// peek 只是"返回了一个哨兵值"，并没有让 pop 停下来。 哨兵值本身不能阻止后续代码的执行。
+
+/* 解决出栈函数段错误  补充  */
+int popV1(LinkedListStack *s) {
+    if (s->size == 0) {
+        printf("栈为空\n");
+        return INT_MAX;     // ← 直接 return，不再往下跑
     }
+    int val = s->top->val;  // ← 能跑到这里说明 top 肯定非空
+    ListNode *tmp = s->top;
+    s->top = s->top->next;  // ← s->top 非空，->next 安全
+    free(tmp);
+    s->size--;
+    return val; 
 }
