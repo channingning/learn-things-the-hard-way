@@ -58,7 +58,7 @@ ORDER BY order_num;
 
 /* 4. */
 -- my test
-SELECT order_num, SUM(quantity*item_price) AS total_price
+SELECT order_num, SUM(quantity * item_price) AS total_price
 FROM OrderItems
 GROUP BY order_num
 HAVING total_price >= 1000
@@ -75,10 +75,10 @@ ORDER BY order_num;
 3 rows in set (0.00 sec)
 */
 
-SELECT order_num, SUM(quantity*item_price) AS total_price
+SELECT order_num, SUM(quantity * item_price) AS total_price
 FROM OrderItems
 GROUP BY order_num
-HAVING SUM(quantity*item_price) >= 1000
+HAVING SUM(quantity * item_price) >= 1000
 ORDER BY order_num;
 
 /*
