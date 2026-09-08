@@ -57,6 +57,7 @@ ORDER BY order_num;
 */
 
 /* 4. */
+-- my test
 SELECT order_num, SUM(quantity*item_price) AS total_price
 FROM OrderItems
 GROUP BY order_num
