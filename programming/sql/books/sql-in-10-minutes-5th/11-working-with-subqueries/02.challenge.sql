@@ -6,8 +6,8 @@
 SELECT cust_id
 FROM Orders
 WHERE order_num IN (SELECT order_num
-                   FROM OrderItems
-                   WHERE item_price >=10);
+                    FROM OrderItems
+                    WHERE item_price >=10);
 
 /*
 +------------+
@@ -60,11 +60,11 @@ WHERE cust_id IN (SELECT cust_id
 
 /* 4. */
 SELECT cust_id,
-    (SELECT SUM(quantity * item_price) 
-    FROM OrderItems 
-    WHERE order_num IN (SELECT order_num
-                        FROM Orders
-                        WHERE Orders.cust_id = Customers.cust_id)) AS total_ordered
+      (SELECT SUM(quantity * item_price) 
+       FROM OrderItems 
+       WHERE order_num IN (SELECT order_num
+                           FROM Orders
+                           WHERE Orders.cust_id = Customers.cust_id)) AS total_ordered
 FROM Customers
 ORDER BY total_ordered DESC;
 
@@ -83,9 +83,9 @@ ORDER BY total_ordered DESC;
 
 /* 5. */
 SELECT prod_name,
-    (SELECT SUM(quantity)
-     FROM OrderItems
-     WHERE OrderItems.prod_id = Products.prod_id) AS quant_sold
+      (SELECT SUM(quantity)
+       FROM OrderItems
+       WHERE OrderItems.prod_id = Products.prod_id) AS quant_sold
 FROM Products;
 
 /*
