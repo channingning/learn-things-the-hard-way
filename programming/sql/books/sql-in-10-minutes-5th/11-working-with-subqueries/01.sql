@@ -104,9 +104,9 @@ WHERE cust_id = 1000000001;
 
 SELECT cust_name,
        cust_state,
-       (SELECT COUNT(*)
-        FROM Orders
-        WHERE Orders.cust_id = Customers.cust_id) AS orders
+      (SELECT COUNT(*)
+       FROM Orders
+       WHERE Orders.cust_id = Customers.cust_id) AS orders
 FROM Customers
 ORDER BY cust_name;
 
@@ -123,7 +123,7 @@ ORDER BY cust_name;
 5 rows in set (0.00 sec)
 */
 
-SELECT COUNT(*)  FROM Orders WHERE cust_id = cust_id;
+SELECT COUNT(*) FROM Orders WHERE cust_id = cust_id;
 
 /*
 +----------+
@@ -136,9 +136,9 @@ SELECT COUNT(*)  FROM Orders WHERE cust_id = cust_id;
 
 SELECT cust_name,
        cust_state,
-       (SELECT COUNT(*)
-        FROM Orders
-        WHERE cust_id = cust_id) AS orders
+      (SELECT COUNT(*)
+       FROM Orders
+       WHERE cust_id = cust_id) AS orders
 FROM Customers
 ORDER BY cust_name;
 
