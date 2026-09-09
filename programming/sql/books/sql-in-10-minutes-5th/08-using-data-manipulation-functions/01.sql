@@ -161,7 +161,7 @@ WHERE EXTRACT(year FROM order_date) = 2020;
 SELECT order_num
 FROM Orders
 WHERE order_date BETWEEN DATEPART('2020-01-01', 'yyyy-mm-dd')
-    AND DATEPART('2020-12-31', 'yyyy-mm-dd');
+  AND DATEPART('2020-12-31', 'yyyy-mm-dd');
 
 -- PostgreSQL: DATE_PART()
 SELECT order_num
@@ -176,7 +176,7 @@ WHERE EXTRACT(year FROM order_date) = 2020;
 SELECT order_num
 FROM Orders
 WHERE order_date BETWEEN to_date('2020-01-01', 'yyyy-mm-dd')
-    AND to_date('2020-12-31', 'yyyy-mm-dd');
+  AND to_date('2020-12-31', 'yyyy-mm-dd');
 
 -- MySQL, MariaDB
 -- YEAR()
