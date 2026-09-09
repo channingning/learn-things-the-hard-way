@@ -5,12 +5,12 @@
 /* 1. */
 -- DB2, PostgreSQL
 SELECT cust_id, cust_name,
-    UPPER(LEFT(cust_contact, 2)) || UPPER(LEFT(cust_city, 3)) AS user_login
+       UPPER(LEFT(cust_contact, 2)) || UPPER(LEFT(cust_city, 3)) AS user_login
 FROM Customers;
 
 -- Oracle, SQLite
 SELECT cust_id, cust_name,
-    UPPER(SUBSTR(cust_contact, 1, 2)) || UPPER(SUBSTR(cust_city, 1, 3)) AS user_login
+       UPPER(SUBSTR(cust_contact, 1, 2)) || UPPER(SUBSTR(cust_city, 1, 3)) AS user_login
 FROM Customers;
 
 /* 
@@ -28,7 +28,7 @@ SQLite
 
 -- MySQL
 SELECT cust_id, cust_name,
-    CONCAT(UPPER(LEFT(cust_contact, 2)), UPPER(LEFT(cust_city, 3))) AS user_login
+       CONCAT(UPPER(LEFT(cust_contact, 2)), UPPER(LEFT(cust_city, 3))) AS user_login
 FROM Customers;
 
 /*
@@ -46,7 +46,7 @@ FROM Customers;
 
 -- SQL Server
 SELECT cust_id, cust_name,
-        UPPER(LEFT(cust_contact, 2)) + UPPER(LEFT(cust_city, 3)) AS user_login
+       UPPER(LEFT(cust_contact, 2)) + UPPER(LEFT(cust_city, 3)) AS user_login
 FROM customers;
 
 /* 2. */
