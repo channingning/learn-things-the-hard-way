@@ -24,13 +24,13 @@
 -- 取当前日期：未测试
     -- CURRENT_DATE
         -- DB2 和 PostgreSQL
-    -- CURDATE()
+    -- CURDATE()  备注：CURRENT_DATE() or Now()  已测试
         -- MariaDB 和 MySQL
     -- SYSDATE
         -- Oracle
     -- GETDATE()
         -- SQL Server
-    -- DATE()
+    -- DATE()  备注：DATE() or date('now')  已测试
         -- SQLite
 
 -- DBMS Function Differences
